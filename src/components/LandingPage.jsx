@@ -10,7 +10,8 @@ const LandingPage = () => {
   });
 
   const onChangeHandler = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value });
   };
 
   return (
