@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import DisplayCooperResult from './DisplayCooperResult';
-import InputFields from './InputFields'
+import InputFields from './InputFields';
 
 const LandingPage = () => {
-  const [gender, setGender] = useState('female');
-  const [values, setValues] = useState({
+  const [form, setForm] = useState({
+    age: '',
     distance: '',
-    age: ''
+    gender: 'female'
   });
 
   const onChangeHandler = e => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-
-    setGender({ [name]: value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
     <>
       <InputFields onChangeHandler={onChangeHandler} />
-      <DisplayCooperResult 
-        distance={values.distance}
-        age={values.age}
-        gender={gender}
+      <DisplayCooperResult
+        distance={form.distance}
+        age={form.age}
+        gender={form.gender}
       />
     </>
   );
