@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DisplayCooperResult from './DisplayCooperResult';
+import InputFields from './InputFields'
 
 const LandingPage = () => {
   const [gender, setGender] = useState('female');
@@ -17,20 +18,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <input
-        name='distance'
-        id='distance'
-        placeholder='Distance'
-        onChange={onChangeHandler}
-      />
-
-      <select name='gender' id='gender' onChange={onChangeHandler}>
-        <option value='female'>Female</option>
-        <option value='male'>Male</option>
-      </select>
-
-      <input name='age' id='age' placeholder='Age' onChange={onChangeHandler} />
-
+      <InputFields onChangeHandler={onChangeHandler} />
       <DisplayCooperResult 
         distance={values.distance}
         age={values.age}
