@@ -10,14 +10,13 @@ const LandingPage = () => {
     gender: 'female'
   });
   const [renderLogin, setRenderLogin] = useState(false);
-
-  const onChangeHandler = e => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const [message, setMessage] = useState('')
+  const [authenticated, setAuthenticated] = useState(false)
 
   const login = renderLogin ? (
-    <LoginForm />
+    <LoginForm 
+      submitFormHandler={onLogin}
+    />
   ) : (
     <button
       id='loign'
@@ -28,6 +27,25 @@ const LandingPage = () => {
       Login
     </button>
   );
+
+  const onChangeHandler = e => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const onLogin = async e => {
+    e.preventDefault()
+    const response = await authenticate(
+      e.target.email.value,
+      e.target.password.value
+    )
+    if (response.authenticated) {
+      setAuthenticated(true)
+    } else {
+      setMessage(response.message)
+      setRenderLogin(false)
+    }
+  }
 
   return (
     <>
