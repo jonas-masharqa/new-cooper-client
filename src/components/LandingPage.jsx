@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DisplayCooperResult from './DisplayCooperResult';
 import InputFields from './InputFields';
 import LoginForm from './LoginForm';
+import { authenticate } from '../modules/auth';
 
 const LandingPage = () => {
   const [form, setForm] = useState({
@@ -9,24 +10,9 @@ const LandingPage = () => {
     distance: '',
     gender: 'female'
   });
-  const [renderLogin, setRenderLogin] = useState(false);
-  const [message, setMessage] = useState('')
-  const [authenticated, setAuthenticated] = useState(false)
-
-  const login = renderLogin ? (
-    <LoginForm 
-      submitFormHandler={onLogin}
-    />
-  ) : (
-    <button
-      id='loign'
-      onClick={() => {
-        setRenderLogin(true);
-      }}
-    >
-      Login
-    </button>
-  );
+  const [renderLoginForm, setRenderLoginForm] = useState(false);
+  const [message, setMessage] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
 
   const onChangeHandler = e => {
     const { name, value } = e.target;
@@ -34,17 +20,41 @@ const LandingPage = () => {
   };
 
   const onLogin = async e => {
-    e.preventDefault()
+    e.preventDefault();
     const response = await authenticate(
       e.target.email.value,
       e.target.password.value
-    )
+    );
     if (response.authenticated) {
-      setAuthenticated(true)
+      setAuthenticated(true);
     } else {
-      setMessage(response.message)
-      setRenderLogin(false)
+      setMessage(response.message);
+      setRenderLoginForm(false);
     }
+  };
+
+  let login;
+
+  // eslint-disable-next-line default-case
+  switch (true) {
+    case renderLoginForm && !authenticated:
+      login = <LoginForm submitFormHandler={onLogin} />;
+      break;
+    case !renderLoginForm && !authenticated:
+      login = (
+        <>
+          <button id='login' onClick={() => setRenderLoginForm(true)}>
+            Login
+          </button>
+          <p className='message'>{message}</p>
+        </>
+      );
+      break;
+    case authenticated:
+      login = (
+        <p className='message'>Hi {JSON.parse(sessionStorage.getItem('credentials')).uid}</p>
+      );
+      break;
   }
 
   return (

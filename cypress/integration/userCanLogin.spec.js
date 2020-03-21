@@ -12,7 +12,7 @@ describe('User authenticate', () => {
         .contains('Submit')
         .click();
     });
-    cy.get('#message').should('contain', 'Hi user@mail.com');
+    cy.get('.message').should('contain', 'Hi user@mail.com');
   });
 
   it('unsuccessfully wiht invalid credentials', () => {
@@ -24,7 +24,7 @@ describe('User authenticate', () => {
         .contains('Submit')
         .click();
     });
-    cy.get('#message').should(
+    cy.get('.message').should(
       'contain',
       'Invalid login credentials. Please try again.'
     );
