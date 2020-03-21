@@ -6,7 +6,7 @@ describe('User authenticate', () => {
   it('successfully with valid credentials', () => {
     cy.get('#login').click();
     cy.get('#login-form').within(() => {
-      cy.get('email'.type('user@mail.com'));
+      cy.get('#email').type('user@mail.com');
       cy.get('#password').type('password');
       cy.get('button')
         .contains('Submit')
