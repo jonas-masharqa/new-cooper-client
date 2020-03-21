@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DisplayCooperResult from './DisplayCooperResult';
 import InputFields from './InputFields';
+import LoginForm from './LoginForm'
 
 const LandingPage = () => {
   const [form, setForm] = useState({
@@ -17,6 +18,8 @@ const LandingPage = () => {
   return (
     <>
       <InputFields onChangeHandler={onChangeHandler} />
+      <button id='login'>Login</button>
+      <LoginForm />
       <DisplayCooperResult
         distance={form.distance}
         age={form.age}
