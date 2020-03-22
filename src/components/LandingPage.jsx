@@ -13,6 +13,7 @@ const LandingPage = () => {
   const [renderLoginForm, setRenderLoginForm] = useState(false);
   const [message, setMessage] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
+  const [entrySaved, setEntrySaved] = useState(false)
 
   const onChangeHandler = e => {
     const { name, value } = e.target;
@@ -65,6 +66,8 @@ const LandingPage = () => {
         distance={form.distance}
         age={form.age}
         gender={form.gender}
+        entrySaved={entrySaved}
+        entryHandler={() => setEntrySaved(true)}
       />
     </>
   );
