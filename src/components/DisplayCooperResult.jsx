@@ -1,5 +1,6 @@
 import React from 'react';
 import cooperCalculator from '../modules/cooperCalculator';
+import saveData from '../modules/performanceData'
 
 const DisplayCooperResult = ({
   distance,
@@ -30,7 +31,6 @@ const DisplayCooperResult = ({
               </button>
           ) : (
             <p id='response-message'>Your entry was saved</p>
-          )
           )}
         </>
       )}
