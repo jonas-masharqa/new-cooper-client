@@ -1,25 +1,26 @@
-import axios from 'axios'
+import axios from "axios";
 
 const saveData = async (result, entryHandler) => {
-  let headers = sessionStorage.getItem('credentials')
-  headers = JSON.parse(headers)
+  let headers = sessionStorage.getItem("credentials");
+  headers = JSON.parse(headers);
   headers = {
     ...headers,
-    'Content-type': 'application/json',
-    Accept: 'application/json'
-  }
+    "Content-type": "application/json",
+    Accept: "application/json"
+  };
   try {
-    await axios.post('/performance_data'),
-    {
-      performance_data: { data: { message: result } }
-    }, {
-      headers: headers
-    }
-    entryHandler()
-  }catch(error) {
-    console.log(error)
-    alert('Something went wrong')
+    await axios.post("/performance_data", 
+      { 
+        performance_data: { data: { message: result } } 
+      }, {
+        headers: headers
+      }
+    );
+    entryHandler();
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
   }
-}
+};
 
-export { saveData }
+export { saveData };

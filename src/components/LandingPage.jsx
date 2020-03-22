@@ -16,8 +16,10 @@ const LandingPage = () => {
   const [entrySaved, setEntrySaved] = useState(false)
 
   const onChangeHandler = e => {
+    debugger
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
+    setEntrySaved(false)
   };
 
   const onLogin = async e => {
@@ -66,8 +68,10 @@ const LandingPage = () => {
         distance={form.distance}
         age={form.age}
         gender={form.gender}
+        authenticated={authenticated}
         entrySaved={entrySaved}
         entryHandler={() => setEntrySaved(true)}
+        onChangeHandler={onChangeHandler}
       />
     </>
   );

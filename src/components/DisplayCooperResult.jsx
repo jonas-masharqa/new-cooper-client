@@ -1,6 +1,7 @@
-import React from 'react';
-import cooperCalculator from '../modules/cooperCalculator';
-import saveData from '../modules/performanceData'
+import React from "react";
+
+import coopercalculator from "../modules/cooperCalculator";
+import { saveData } from "../modules/performanceData";
 
 const DisplayCooperResult = ({
   distance,
@@ -10,7 +11,7 @@ const DisplayCooperResult = ({
   entrySaved,
   entryHandler
 }) => {
-  const result = cooperCalculator(distance, gender, age);
+  const result = coopercalculator(distance, gender, age);
 
   const propsPassed = distance && age ? true : false;
 
@@ -18,19 +19,23 @@ const DisplayCooperResult = ({
     <>
       {propsPassed && (
         <>
-          <p id='cooper-message'>
+          <p id="cooper-message">
             {age} y/o {gender} running {distance} meters.
           </p>
-          <p id='cooper-result'>Result: {result}</p>
+          <p id="cooper-result">Result: {result}</p>
           {authenticated && !entrySaved ? (
             <button
-              id='save-result'
+              id="save-result"
               onClick={() => saveData(result, entryHandler)}
-              >
-                Save entry
-              </button>
+            >
+              Save entry
+            </button>
           ) : (
-            <p id='response-message'>Your entry was saved</p>
+            authenticated ? (
+              <p id="response-message">Your entry was saved</p>
+            ) : (
+              <p>Please sign in if you wish to save your entries.</p>
+            )
           )}
         </>
       )}
